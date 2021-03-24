@@ -33,7 +33,9 @@ public class RadioCharts {
     public String getMostActiveArtist() {
         String result = "";
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-            String sql = "SELECT artist,COUNT(artist) AS occurence FROM music_broadcast GROUP BY artist ORDER BY occurence DESC LIMIT 1";
+            String sql = "SELECT artist,COUNT(artist) AS occurence FROM music_broadcast " +
+                    " GROUP BY artist " +
+                    "ORDER BY occurence DESC LIMIT 1";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
