@@ -17,7 +17,7 @@ public class RadioCharts {
     public String getMostPlayedSong() {
         String result = "";
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-            String sql = "SELECT  song FROM music_broadcast ORDER BY times_aired DESC LIMIT 1";
+            String sql = "SELECT song FROM music_broadcast ORDER BY times_aired DESC LIMIT 1";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
@@ -33,7 +33,7 @@ public class RadioCharts {
     public String getMostActiveArtist() {
         String result = "";
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-            String sql =  "SELECT artist, COUNT(DISTINCT song) AS countered\n"
+            String sql = "SELECT artist, COUNT(DISTINCT song) AS countered\n"
                     + "FROM music_broadcast\n"
                     + "GROUP BY artist\n"
                     + "ORDER BY countered DESC LIMIT 1";
